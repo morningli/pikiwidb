@@ -126,7 +126,8 @@ void PikaReplBgWorker::HandleBGWorkerWriteBinlog(void* arg) {
                    << " expected_session: " << binlog_res.session_id()
                    << ", actual_session:" << slave_db->MasterSessionId();
       LOG(WARNING) << "Check Session failed " << binlog_res.slot().db_name();
-      slave_db->SetReplState(ReplState::kTryConnect);
+      // ignore expired task
+      // slave_db->SetReplState(ReplState::kTryConnect);
       return;
     }
 
